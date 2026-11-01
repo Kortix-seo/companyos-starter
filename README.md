@@ -2,7 +2,7 @@
 
 This repository is a small CompanyOS you can run on Kortix and read end to end: one agent, two skills, the company memory and one weekly trigger, each committed beside the files it works on. Kortix is the open-source CompanyOS: your agents, their skills, your company memory, and every connector in one git repo you own, with the agents working on real cloud computers. Ten files with this one, all text you can open in an editor.
 
-Plenty of things called a CompanyOS turn out to be a folder of documents a model reads at the start of a conversation. The difference here is what runs. The prompts in `agents/` are loaded by a session, the procedures in `skills/` are the steps that agent follows, and `memory/` is the record it has to check before it answers. A task ends with files in the repository and a change request a person reads, which is why the smallest one ships as code.
+Plenty of things called a CompanyOS turn out to be a folder of documents a model reads at the start of a conversation. The difference here is what runs. The prompts in `agents/` are loaded by a session, the procedures in `skills/` are the steps that agent follows, and `memory/` is the record it has to check before it answers. A task ends with files in the repository and a change request a person reads, which is why the smallest one ships as code. Stated plainly: [what a CompanyOS is](https://companyosguide.com/what-is-a-company-os) comes down to which parts run.
 
 ## What is in it
 
@@ -25,7 +25,7 @@ Both skills are folders under `skills/`; the memory is three files under `memory
 | `memory/decisions/2026-10-01-pricing.md` | One decision on file: the list price, the reason, the date, what it replaced |
 | `.gitignore` | `.kortix/`, `node_modules/`, `.DS_Store` |
 
-Each skill is a folder with a `SKILL.md`: a name, a description of when to use it, then steps and rules.
+Each skill is a folder with a `SKILL.md`: a name, a description of when to use it, then steps and rules. The fuller list of parts sits in [what a CompanyOS must contain](https://companyosguide.com/what-a-company-os-must-contain).
 
 ## Quickstart
 
@@ -98,8 +98,8 @@ A trigger is the third edit. Add a second entry under `triggers:` with its own `
 
 ## Self-host or cloud
 
-Run it on Kortix Cloud, in your VPC, or on your own on-prem network. Self-host is free. The repository does not change with the choice. `kortix self-host init --domain <your domain>` writes the configuration and `kortix self-host start` brings it up on your own machine; a cloud project is the same clone, with sessions on machines you did not provision. Secrets stay in the deployment, never in `kortix.yaml`.
+Run it on Kortix Cloud, in your VPC, or on your own on-prem network. Self-host is free. The repository does not change with the choice. `kortix self-host init --domain <your domain>` writes the configuration and `kortix self-host start` brings it up on your own machine; a cloud project is the same clone, with sessions on machines you did not provision. Where your data has to stay decides it, and [self-hosting a CompanyOS](https://companyosguide.com/self-hosted-company-os) works through the rest. Secrets stay in the deployment, never in `kortix.yaml`.
 
 ## What a CompanyOS has to contain
 
-[companyosguide.com](https://companyosguide.com) sets out what a CompanyOS needs before it deserves the name: agents, the skills they run, the memory they check, and the review step that stops work landing unreviewed. This repository is the smallest version of that list you can clone and run.
+The [CompanyOS comparison](https://companyosguide.com/companyos-comparison) lines the options up side by side. [companyosguide.com](https://companyosguide.com) sets out what a CompanyOS needs before it deserves the name: agents, the skills they run, the memory they check, and the review step that stops work landing unreviewed. This repository is the smallest version of that list you can clone and run.
