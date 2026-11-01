@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://kortix.com/schema/kortix.v3.schema.json
+#
+# companyos-starter: one agent, two skills, the company memory and one weekly
+# trigger, all committed beside the files they work on.
+# Reference: https://kortix.com/docs/developers#kortixyaml-reference
+
+kortix_version: 3
+default_agent: ops-desk
+
+project:
+  name: companyos-starter
+  description: A minimal CompanyOS in one repo: an agent, two skills, the company memory and a weekly trigger.
+
+# Registries: what the project has. A registry entry gives nothing to any agent.
+skills:
+  invoice-reconcile: skills/invoice-reconcile
+  meeting-notes: skills/meeting-notes
+
+agents:
+  ops-desk:
+    description: Runs the week's operations work, writes the result as files and opens a change request.
+    mode: primary
+    permission: allow
+    prompt_file: agents/ops-desk.md
+    tools: all
+    skills: [invoice-reconcile, meeting-notes]
+    connectors: none
+    secrets: none
+    kortix_permissions: all
+    workspace: { project_repository: true }
+
+  weekly-review:
+    description: Writes the week's review from the repository and opens a change request with it.
+    mode: subagent
+    permission: allow
+    prompt_file: agents/weekly-review.md
+    tools: all
+    skills: [meeting-notes]
+    connectors: none
+    secrets: none
+    kortix_permissions: all
+    workspace: { project_repository: true }
+
+# A schedule that starts agent work. This one runs the review every Monday at 08:00 UTC.
+triggers:
+  - slug: weekly-review
+    name: Weekly review
+    on:
+      cron: "0 8 * * 1"
+      timezone: UTC
+    run:
+      agent: weekly-review
+      prompt: Write this week's review from memory/ and the commits since last Monday, put it in reviews/ and open a change request.
